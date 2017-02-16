@@ -50,7 +50,28 @@ namespace Brezenhema
 
         static public void DdaLine(Graphics g, Color clr, int x0, int y0, int x1, int y1)
         {
-            
+            int dx, dy;
+            float x, xFark;
+            float y, yFark;
+
+            dx = x1 - x0;
+            dy = y1 - y0;
+
+            var pikselSayisi = Math.Abs(dx) > Math.Abs(dy) ? Math.Abs(dx) : Math.Abs(dy);
+
+            xFark = (float)dx / (float)pikselSayisi;
+            yFark = (float)dy / (float)pikselSayisi;
+
+            x = (float)x0;
+            y = (float)y0;
+
+            while (pikselSayisi!=0)
+            {
+                PutPixel(g, clr, (int)Math.Floor(x + 0.5F), (int)Math.Floor(y + 0.5f), 255);
+                x += xFark;
+                y += yFark;
+                pikselSayisi--;
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
